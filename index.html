@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ness · 个人作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Fable 颜色 */
+    --color-fable-forest: #064c37;
+    --color-storybook-sky: #43a1d7;
+    --color-paper-cream: #f7f4ee;
+    --color-ink: #161015;
+    --color-charcoal-plum: #292229;
+    --color-graphite: #3f383d;
+    --color-char: #070607;
+    --color-pure-white: #ffffff;
+    --color-fog: #ededed;
+
+    --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-heldane-display: 'Fraunces', 'Lora', 'Playfair Display', ui-serif, Georgia, serif;
+
+    --radius-buttons: 60px;
+    --radius-cards: 12px;
+    --radius-largecards: 48px;
+    --radius-smallchips: 8px;
+
+    --shadow-lg: rgba(0, 0, 0, 0.4) 0px 4px 20px 0px;
+    --shadow-lg-2: rgba(0, 0, 0, 0.6) 0px 4px 20px 0px;
+    --shadow-tile: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
+
+    --page-max-width: 1200px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-inter);
+    background: var(--color-pure-white);
+    color: var(--color-graphite);
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.32px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 星星动态效果 ===== */
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    color: #f2c94c;
+    font-size: 14px;
+    animation: twinkle 3s ease-in-out infinite;
+    opacity: 0.7;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: translateY(0) scale(0.8); }
+    50% { opacity: 0.9; transform: translateY(-6px) scale(1.1); }
+  }
+
+  /* ===== 导航 ===== */
+  nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+    color: var(--color-pure-white);
+    background: transparent;
+  }
+  .logo {
+    font-family: var(--font-heldane-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-pure-white);
+  }
+  nav ul { display: flex; list-style: none; gap: 32px; }
+  nav ul a {
+    color: var(--color-pure-white);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  nav ul a:hover { border-bottom-color: var(--color-pure-white); }
+
+  /* ===== 通用 ===== */
+  .band { width: 100%; }
+  .wrap {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+
+  .display {
+    font-family: var(--font-heldane-display);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: 0;
+  }
+
+  .btn {
+    display: inline-block;
+    border-radius: var(--radius-buttons);
+    padding: 16px 28px;
+    font-family: var(--font-inter);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.32px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-dark {
+    background: var(--color-charcoal-plum);
+    color: var(--color-pure-white);
+    box-shadow: var(--shadow-lg);
+  }
+  .btn-white {
+    background: var(--color-pure-white);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ===== Hero（深绿森林带）===== */
+  .hero {
+    background: var(--color-fable-forest);
+    color: var(--color-pure-white);
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-bottom: 80px;
+  }
+  .hero h1 {
+    font-family: var(--font-heldane-display);
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 0.88;
+    color: var(--color-pure-white);
+    max-width: 520px;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: normal; }
+  .hero .sub {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.27px;
+    color: var(--color-pure-white);
+    max-width: 460px;
+    margin-bottom: 32px;
+    opacity: 0.92;
+  }
+  .hero .cta { display: flex; gap: 16px; }
+
+  /* 右侧插图（装饰） */
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-art .figure {
+    width: 72%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #e8813f;
+    position: relative;
+    box-shadow: var(--shadow-lg-2);
+    overflow: hidden;
+  }
+  .hero-art .figure img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-art .accent {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .hero-art .a1 { width: 48px; height: 48px; background: #f2c94c; top: 8%; left: 10%; }
+  .hero-art .a2 { width: 28px; height: 28px; background: #43a1d7; top: 70%; left: 6%; }
+  .hero-art .a3 { width: 34px; height: 34px; background: #e86f8c; top: 12%; right: 8%; }
+  .hero-art .a4 { width: 20px; height: 20px; background: #f7f4ee; bottom: 10%; right: 16%; }
+
+  /* ===== 关于（奶油带）===== */
+  .about { background: var(--color-paper-cream); }
+  .about h2 {
+    font-size: 80px;
+    line-height: 0.86;
+    color: var(--color-ink);
+    max-width: 560px;
+    margin-bottom: 16px;
+  }
+  .about .sub {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.08;
+    color: var(--color-graphite);
+    margin-bottom: 48px;
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .about-photo {
+    border-radius: var(--radius-largecards);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg-2);
+    aspect-ratio: 3 / 4;
+    position: relative;
+  }
+  .about-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-cols { display: flex; flex-direction: column; gap: 24px; }
+  .card {
+    background: var(--color-paper-cream);
+    border-radius: var(--radius-cards);
+    padding: 24px;
+    box-shadow: var(--shadow-lg-2);
+  }
+  .about .card { background: var(--color-pure-white); }
+  .card h3 {
+    font-family: var(--font-inter);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.48px;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+  .card p { font-size: 16px; line-height: 1.5; letter-spacing: -0.32px; color: var(--color-graphite); }
+  .card .btn-row { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .card .btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-buttons);
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.25px;
+    text-decoration: none;
+    background: var(--color-charcoal-plum);
+    color: var(--color-pure-white);
+    box-shadow: var(--shadow-lg);
+    transition: transform .2s;
+  }
+  .card .btn-sm:hover { transform: translateY(-2px); }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    color: var(--color-graphite);
+  }
+  .skill-list li + li { border-top: 1px solid var(--color-fog); }
+  .skill-list .score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+  .skill-list .score .bar {
+    display: block;
+    height: 6px;
+    width: 90px;
+    background: var(--color-fog);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .skill-list .score .bar i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #43a1d7, #6cb7e6);
+    border-radius: 999px;
+  }
+
+  .edu-list { list-style: none; }
+  .edu-list li { display: flex; flex-direction: column; gap: 4px; padding: 14px 0; }
+  .edu-list li + li { border-top: 1px solid var(--color-fog); }
+  .edu-list .edu-time { font-size: 13px; letter-spacing: -0.2px; color: var(--color-graphite); opacity: 0.75; }
+  .edu-list .edu-name { font-size: 16px; font-weight: 600; letter-spacing: -0.32px; color: var(--color-ink); }
+  .edu-list .edu-desc { font-size: 14px; letter-spacing: -0.25px; color: var(--color-graphite); line-height: 1.43; }
+
+  .honor-list { list-style: none; }
+  .honor-list li {
+    position: relative;
+    padding: 10px 0 10px 20px;
+    font-size: 14px;
+    letter-spacing: -0.25px;
+    line-height: 1.5;
+    color: var(--color-graphite);
+  }
+  .honor-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 17px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-storybook-sky);
+  }
+
+  .about-extra {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  /* ===== 我的产品（深绿带）===== */
+  .product { background: var(--color-fable-forest); color: var(--color-pure-white); }
+  .product .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .product h2 {
+    font-size: 64px;
+    line-height: 0.9;
+    color: var(--color-pure-white);
+    max-width: 520px;
+    margin-bottom: 20px;
+  }
+  .product .lead {
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.27px;
+    color: var(--color-pure-white);
+    opacity: 0.92;
+    margin-bottom: 28px;
+    max-width: 460px;
+  }
+  .feature-list { list-style: none; margin-bottom: 32px; }
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    line-height: 1.5;
+    color: var(--color-pure-white);
+    opacity: 0.92;
+  }
+  .feature-list li + li { border-top: 1px solid rgba(255,255,255,0.14); }
+  .feature-list .dot {
+    flex: none;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #f2c94c;
+    margin-top: 7px;
+  }
+
+  /* 产品预览卡片 */
+  .product-preview {
+    background: var(--color-pure-white);
+    border-radius: var(--radius-largecards);
+    padding: 40px;
+    box-shadow: var(--shadow-lg-2);
+    color: var(--color-ink);
+  }
+  .product-preview .app-name {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.08;
+    color: var(--color-ink);
+    margin-bottom: 6px;
+  }
+  .product-preview .app-desc {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    color: var(--color-graphite);
+    margin-bottom: 24px;
+  }
+  .product-preview .mock {
+    background: var(--color-paper-cream);
+    border-radius: var(--radius-cards);
+    padding: 24px;
+    text-align: center;
+    color: var(--color-graphite);
+  }
+  .product-preview .mock .big { font-size: 48px; margin-bottom: 12px; }
+  .product-preview .mock .label { font-size: 14px; letter-spacing: -0.25px; }
+  .product-preview .cover {
+    border-radius: var(--radius-cards);
+    overflow: hidden;
+    box-shadow: var(--shadow-tile);
+  }
+  .product-preview .cover img {
+    width: 100%; height: auto;
+    display: block;
+  }
+
+  /* ===== 作品（天蓝带）===== */
+  .projects { background: var(--color-storybook-sky); }
+  .projects h2 {
+    font-size: 72px;
+    line-height: 0.88;
+    color: var(--color-ink);
+    max-width: 560px;
+    margin-bottom: 16px;
+  }
+  .projects .sub {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.08;
+    color: var(--color-ink);
+    margin-bottom: 48px;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .project {
+    background: var(--color-pure-white);
+    border-radius: var(--radius-largecards);
+    padding: 32px;
+    box-shadow: var(--shadow-lg-2);
+    transition: transform .25s;
+  }
+  .project:hover { transform: translateY(-6px); }
+  .project .thumb {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  .project h3 {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.08;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+  }
+  .project p {
+    font-size: 14px;
+    line-height: 1.43;
+    letter-spacing: -0.25px;
+    color: var(--color-graphite);
+    margin-bottom: 16px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-smallchips);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    background: var(--color-paper-cream);
+    color: var(--color-ink);
+    margin-right: 6px;
+  }
+
+  /* ===== 作品集（奶油带）===== */
+  .gallery { background: var(--color-paper-cream); }
+  .gallery h2 {
+    font-size: 80px;
+    line-height: 0.86;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+  .gallery .sub {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.08;
+    color: var(--color-graphite);
+    margin-bottom: 48px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--color-fog);
+    border-radius: var(--radius-smallchips);
+    overflow: hidden;
+    box-shadow: var(--shadow-tile);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: var(--color-graphite);
+    transition: transform .25s;
+  }
+  .gallery-item:hover { transform: scale(1.03); }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .gallery-item .cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 20px 14px 12px;
+    background: linear-gradient(transparent, rgba(7,6,7,0.75));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    line-height: 1.3;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .gallery-item:hover .cap { opacity: 1; }
+
+  /* ===== 联系（深绿带）===== */
+  .contact { background: var(--color-fable-forest); color: var(--color-pure-white); }
+  .contact .wrap { text-align: left; }
+  .contact h2 {
+    font-size: 72px;
+    line-height: 0.88;
+    color: var(--color-pure-white);
+    margin-bottom: 16px;
+  }
+  .contact .sub {
+    font-family: var(--font-heldane-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.08;
+    color: var(--color-pure-white);
+    opacity: 0.9;
+    margin-bottom: 40px;
+  }
+  .contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* ===== 页脚（炭色带）===== */
+  footer {
+    background: var(--color-char);
+    color: var(--color-pure-white);
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-size: 14px;
+    letter-spacing: -0.25px;
+    opacity: 0.8;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 768px) {
+    nav { padding: 20px 16px; }
+    nav ul { gap: 16px; }
+    nav ul a { font-size: 13px; }
+    .hero .wrap { grid-template-columns: 1fr; padding-top: 120px; }
+    .hero h1 { font-size: 48px; }
+    .hero-art { order: -1; width: 80%; margin: 0 auto; }
+    .about h2, .gallery h2 { font-size: 48px; }
+    .projects h2, .contact h2 { font-size: 44px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-extra { grid-template-columns: 1fr; }
+    .product .wrap { grid-template-columns: 1fr; }
+    .product h2 { font-size: 44px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    footer .wrap { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">张ness</div>
+  <ul>
+    <li><a href="#home">首页</a></li>
+    <li><a href="#about">关于</a></li>
+    <li><a href="#product">产品</a></li>
+    <li><a href="#projects">作品</a></li>
+    <li><a href="#gallery">作品集</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- ① 深绿 Hero 带 -->
+<header class="band hero" id="home">
+  <div class="wrap" style="position:relative;">
+    <div class="stars" id="hero-stars"></div>
+    <div>
+      <h1>你好，我是<em>张ness</em></h1>
+      <p class="sub">一名 AI 产品经理。我关注人工智能如何落地为真正有价值的产品，这里记录我的思考、作品与成长。</p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-white">查看作品</a>
+        <a href="#contact" class="btn btn-white" style="background:transparent;color:#fff;box-shadow:none;border:1px solid #fff;">联系我</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="accent a1"></div>
+      <div class="accent a2"></div>
+      <div class="accent a3"></div>
+      <div class="accent a4"></div>
+      <div class="figure"><img src="个人文艺照.jpg" alt="张ness 的个人照片"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ② 奶油带：关于 -->
+<section class="band about" id="about">
+  <div class="wrap">
+    <h2 class="display">关于我</h2>
+    <p class="sub">张ness · AI 产品经理 · 设计与美术背景</p>
+    <div class="about-grid">
+      <div class="about-photo"><img src="个人文艺照.jpg" alt="张ness 的个人照片"></div>
+      <div class="about-cols">
+        <div class="card">
+          <h3>个人简介</h3>
+          <p>你好，我是 <strong>张ness</strong>。美术学硕士出身，兼具设计与 AI 产品跨界背景。我专注于将人工智能技术转化为真正可用的产品，擅长需求洞察、产品规划与跨团队协作，同时具备扎实的设计功底与内容策划能力。</p>
+        </div>
+        <div class="card">
+          <h3>教育背景</h3>
+          <ul class="edu-list">
+            <li>
+              <span class="edu-time">2023.09 — 2026.06</span>
+              <span class="edu-name">齐齐哈尔大学 · 美术学（硕士）</span>
+              <span class="edu-desc">中国传统美术理论、绘画艺术表现研究、色彩表达研究</span>
+            </li>
+            <li>
+              <span class="edu-time">2018.09 — 2022.06</span>
+              <span class="edu-name">山东青年政治学院 · 环境设计（本科）</span>
+              <span class="edu-desc">设计学概论、中外建筑史、室内专题设计（GPA 3.46）</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-extra">
+      <div class="card">
+        <h3>技能</h3>
+        <ul class="skill-list">
+          <li><span>Photoshop</span><span class="score"><span class="bar"><i style="width:92%"></i></span>92%</span></li>
+          <li><span>Figma</span><span class="score"><span class="bar"><i style="width:88%"></i></span>88%</span></li>
+          <li><span>3DMAX / SketchUp / CAD</span><span class="score"><span class="bar"><i style="width:85%"></i></span>85%</span></li>
+          <li><span>墨刀 / ProcessOn</span><span class="score"><span class="bar"><i style="width:86%"></i></span>86%</span></li>
+          <li><span>Office 办公软件</span><span class="score"><span class="bar"><i style="width:90%"></i></span>90%</span></li>
+          <li><span>英语（CET6）</span><span class="score"><span class="bar"><i style="width:88%"></i></span>88%</span></li>
+          <li><span>AI 产品规划 / 需求洞察</span><span class="score"><span class="bar"><i style="width:90%"></i></span>90%</span></li>
+          <li><span>文案撰写 / 新媒体运营</span><span class="score"><span class="bar"><i style="width:85%"></i></span>85%</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>经历与荣誉</h3>
+        <ul class="honor-list">
+          <li>担任班级班长，获“研究生论坛论文二等奖”</li>
+          <li>英语培训机构课程咨询与市场实习，月度试听转化达标率 85%，转介绍 10+ 人</li>
+          <li>校大学生新闻中心设计部：海报、文创设计</li>
+          <li>学院官方公众号新媒体运营，独立完成采编与图文排版</li>
+          <li>获校一等奖学金、乒乓球团体赛亚军、三好学生等荣誉</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>科研成果</h3>
+        <ul class="honor-list">
+          <li>《中国冰雪绘画的色彩及其文化内涵刍议》—《艺术时尚》2023 年第 29 期</li>
+          <li>《时空融合观念下山东龙山文化黑陶艺术的表现研究》—《收藏与投资》2025 年第 6 期</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 深绿带：我的产品 -->
+<section class="band product" id="product">
+  <div class="wrap">
+    <div>
+      <h2 class="display">校招职达<br>AI 自动化工作台</h2>
+      <p class="lead">我亲手打造的 AI 求职产品，将校招的每一个环节——从简历、岗位到投递进度，都变成清晰、可执行的路径。</p>
+      <ul class="feature-list">
+        <li><span class="dot"></span>AI 简历 Agent：按岗位 JD 一键生成定制简历</li>
+        <li><span class="dot"></span>岗位库 + 匹配中心：科学评估岗位与档案匹配度</li>
+        <li><span class="dot"></span>求职管家 Agent：全程辅导求职之旅</li>
+        <li><span class="dot"></span>AI 开放题草稿：破题起稿，辅助准备</li>
+        <li><span class="dot"></span>求职档案 + 进度跟踪：申请记录一目了然</li>
+      </ul>
+      <a class="btn btn-white" href="https://career-app-9v4.pages.dev" target="_blank">体验产品 →</a>
+    </div>
+    <div class="product-preview">
+      <div class="app-name">校招职达 · AI 求职工作台</div>
+      <p class="app-desc">让复杂的求职过程，变成清晰的执行路径</p>
+      <div class="cover"><img src="校招职达封面图.png" alt="校招职达封面图"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 天蓝带：作品 -->
+<section class="band projects" id="projects">
+  <div class="wrap">
+    <h2 class="display">我的作品</h2>
+    <p class="sub">一些我做过的东西</p>
+    <div class="projects-grid">
+      <div class="project">
+        <div class="thumb">🏗️</div>
+        <h3>西藏索松村建筑设计</h3>
+        <p>西藏索松村的建筑设计方案，融合当地地域特色与自然风貌，打造兼具功能与美感的建筑空间。</p>
+        <span class="tag">建筑</span><span class="tag">设计</span>
+      </div>
+      <div class="project">
+        <div class="thumb">📍</div>
+        <h3>公共区域标识设计</h3>
+        <p>公共区域的标识系统设计，兼顾引导性与视觉统一，提升空间辨识度与用户体验。</p>
+        <span class="tag">标识</span><span class="tag">设计</span>
+      </div>
+      <div class="project">
+        <div class="thumb">🎓</div>
+        <h3>校招职达 · AI 工作台</h3>
+        <p>自己打造的 AI 求职产品，覆盖简历定制、岗位匹配、求职管家与进度跟踪等能力。</p>
+        <span class="tag">AI</span><span class="tag">产品</span>
+      </div>
+      <div class="project">
+        <div class="thumb">✍️</div>
+        <h3>内容生成工具</h3>
+        <p>面向创作者的一站式内容生成平台，覆盖文案、配图与多语言改写。</p>
+        <span class="tag">AI</span><span class="tag">工具</span>
+      </div>
+      <div class="project">
+        <div class="thumb">📊</div>
+        <h3>数据分析平台</h3>
+        <p>通过 AI 辅助洞察业务数据，提供智能报表与预测分析能力。</p>
+        <span class="tag">AI</span><span class="tag">数据</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 奶油带：作品集 -->
+<section class="band gallery" id="gallery">
+  <div class="wrap">
+    <h2 class="display">作品集</h2>
+    <p class="sub">我的设计作品</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="作品1-校园导视标识.png" alt="校园导视标识系统设计"><span class="cap">校园导视标识系统设计</span></div>
+      <div class="gallery-item"><img src="作品2-口袋公园景观.png" alt="济南经十东路口袋公园景观设计"><span class="cap">济南经十东路口袋公园景观设计</span></div>
+      <div class="gallery-item"><img src="作品3-燕窝专卖店室内.png" alt="雅燕堂燕窝品牌专卖店室内设计"><span class="cap">雅燕堂燕窝品牌专卖店室内设计</span></div>
+      <div class="gallery-item"><img src="作品4.png" alt="设计作品四"><span class="cap">设计作品</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 深绿带：联系 -->
+<section class="band contact" id="contact">
+  <div class="wrap">
+    <h2 class="display">联系我</h2>
+    <p class="sub">欢迎随时交流</p>
+    <div class="contact-links">
+      <a class="btn btn-white" href="mailto:you@example.com">✉️ 邮箱</a>
+      <a class="btn btn-white" href="#">💬 微信</a>
+      <a class="btn btn-white" href="https://github.com" target="_blank">🐙 GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 炭色页脚带 -->
+<footer>
+  <div class="wrap">
+    <span>© 2024 张ness · 用心制作</span>
+    <span>AI 产品经理 · 建筑设计 · 标识设计</span>
+  </div>
+</footer>
+
+<script>
+  // 在 Hero 区生成动态星星
+  (function () {
+    var container = document.getElementById('hero-stars');
+    if (!container) return;
+    var chars = ['★', '✦', '☆', '✧'];
+    var count = 24;
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement('span');
+      s.className = 'star';
+      s.textContent = chars[Math.floor(Math.random() * chars.length)];
+      s.style.left = (Math.random() * 96) + '%';
+      s.style.top = (Math.random() * 96) + '%';
+      s.style.fontSize = (10 + Math.random() * 18) + 'px';
+      s.style.animationDelay = (Math.random() * 3) + 's';
+      s.style.animationDuration = (2 + Math.random() * 3) + 's';
+      s.style.opacity = Math.random() * 0.6;
+      container.appendChild(s);
+    }
+  })();
+</script>
+
+</body>
+</html>
